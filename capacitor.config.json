@@ -1,0 +1,13 @@
+{
+  "appId": "org.team.kasifooddelivery",
+  "appName": "kasifooddelivery",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
