@@ -38,12 +38,13 @@
             class="mx-0"
         >
         <v-col>
-            <v-btn @click="AddtoCartNo1" color="warning" dark>
+            <v-btn @click="AddtoCartNo1" :disabled="loading" color="warning" dark>
               Add to Cart
-              <v-progress-circular
-                indeterminate
-                color="red"
-              ></v-progress-circular>
+                <v-progress-circular
+                  v-if=this.$store.getters.cart_loading
+                  indeterminate
+                  color="red"
+                ></v-progress-circular>
             </v-btn>
         </v-col>
         <v-col>
@@ -112,6 +113,7 @@ export default {
       rounded: false,
 
       loading: false,
+      addCartLoading: false,
       value: 1,
 
     }),
@@ -128,7 +130,7 @@ export default {
         router.push('/checkout')
       }
     },
-    computed: mapGetters(['product_detail', 'userjwt', 'user_cart_sum']),
+    computed: mapGetters(['product_detail', 'userjwt', 'user_cart_sum', 'cart_loading']),
     created() {
       let prod_id = this.$route.params.id
       this.fetchProductDetail(this.$route.params.id);

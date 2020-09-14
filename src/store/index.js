@@ -29,6 +29,7 @@ export default new Vuex.Store({
     user_cart_data: [],
     user_get_cart_sum: 0,
     comments: [],
+    addCartLoading: false,
   },
   mutations: {
     updateToken(state, newToken) {
@@ -94,6 +95,9 @@ export default new Vuex.Store({
     },
     addProductComments(state, comment_data) {
       state.comments = comment_data
+    },
+    addCartLoad(state, loading){
+      state.addCartLoading = loading
     }
   },
   getters: {
@@ -109,6 +113,7 @@ export default new Vuex.Store({
     user_cart: state => state.user_cart_data,
     user_cart_sum: state => state.user_get_cart_sum,
     product_comments: state => state.comments,
+    cart_loading: state => state.addCartLoading
 
   },
   actions: {
@@ -199,6 +204,8 @@ export default new Vuex.Store({
 
     async AddtoCart({ commit }, cart_data) {
 
+      console.log("adding to cart lana");
+      commit('addCartLoad', true)
       let prod_id = cart_data.prod_id
       let user_id = cart_data.user_id
       let user_quantity = cart_data.user_quantity
@@ -279,6 +286,7 @@ export default new Vuex.Store({
       existing_items.push(cart_item_id)
       commit('nullShit');
 
+      
       const url = this.state.endpoints.baseURL + 'api-shopping_cart3/api_shopping_cart3_cartdetail/' + cart_id + '/'
       axios
         .patch(url, {
@@ -288,7 +296,8 @@ export default new Vuex.Store({
           Vue.$toast.open("Item added to cart" + resupdateCart, {
             timeout: 2000
           });
-          
+          console.log("Finished adding to cart");
+          commit('addCartLoad', false)
         })
         // .catch(err => );
 
