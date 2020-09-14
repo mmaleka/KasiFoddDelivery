@@ -38,7 +38,13 @@
             class="mx-0"
         >
         <v-col>
-            <v-btn @click="AddtoCartNo1" color="warning" dark>Buy!!</v-btn>
+            <v-btn @click="AddtoCartNo1" color="warning" dark>
+              Add to Cart
+              <v-progress-circular
+                indeterminate
+                color="red"
+              ></v-progress-circular>
+            </v-btn>
         </v-col>
         <v-col>
             <v-btn @click="CheckOutNo1" color="success" dark>Checkout</v-btn>
@@ -134,6 +140,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.v-progress-circular {
+  margin: 1rem;
+}
 </style>
