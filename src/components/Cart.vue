@@ -49,7 +49,7 @@
 
     <v-row no-gutters>
       <v-col class="text-center">
-        <p class="orange--text">whatsap us: 0829046234</p>
+        <p class="orange--text">whatsap us: 0815426027</p>
       </v-col>
     </v-row>
     
