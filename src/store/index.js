@@ -101,7 +101,6 @@ export default new Vuex.Store({
       state.addCartLoading = loading
     },
     completeCartUser(state, loading1){
-      console.log("loading1: ", loading1);
       state.completeCartLoading = loading1
     }
   },
