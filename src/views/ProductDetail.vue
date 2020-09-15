@@ -37,7 +37,7 @@
             align="center"
             class="mx-0"
         >
-        <v-col cols-sm="12" align="center">
+        <v-col cols="12" align="center">
             <v-btn @click="AddtoCartNo1" :disabled="loading" color="warning" dark>
               Add to Cart
                 <v-progress-circular
