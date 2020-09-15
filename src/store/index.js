@@ -30,6 +30,7 @@ export default new Vuex.Store({
     user_get_cart_sum: 0,
     comments: [],
     addCartLoading: false,
+    completeCart: false,
   },
   mutations: {
     updateToken(state, newToken) {
@@ -98,6 +99,9 @@ export default new Vuex.Store({
     },
     addCartLoad(state, loading){
       state.addCartLoading = loading
+    },
+    completeCartUser(state, loading1){
+      state.completeCart = loading1
     }
   },
   getters: {
@@ -113,7 +117,8 @@ export default new Vuex.Store({
     user_cart: state => state.user_cart_data,
     user_cart_sum: state => state.user_get_cart_sum,
     product_comments: state => state.comments,
-    cart_loading: state => state.addCartLoading
+    cart_loading: state => state.addCartLoading,
+    complete_cart_loading: state => state.completeCart,
 
   },
   actions: {
@@ -308,6 +313,9 @@ export default new Vuex.Store({
       let cell_number = checkoutdata.cell_number
       let delivery_address = checkoutdata.delivery_address
       let comment = checkoutdata.comment
+      
+      console.log("starting to complete cart");
+      commit('completeCartUser', true)
 
       // get the owner using user id
       const res_profile = await axios.get(
@@ -340,10 +348,15 @@ export default new Vuex.Store({
           timeout: 4000
         });
 
+        
         console.log("resupdateCart: ", resupdateCart.data);
         // Run python function to send email or whatspp to notify service provider
         // Will send the email to notify of order
         let orderNo = resupdateCart.data.id
+
+        console.log("finished to complete cart");
+        commit('completeCartUser', false)
+
         console.log("orderDetails: ", orderNo);
         this.dispatch('sendOrderEmail', { orderNo })
 

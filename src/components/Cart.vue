@@ -38,7 +38,19 @@
                     ></v-text-field>
                 </ValidationProvider>
 
-                <v-btn type="submit" @click="placeOrder" value="Submit" color="primary" dark>Place Order</v-btn>
+                <v-btn 
+                type="submit" 
+                @click="placeOrder" 
+                value="Submit" 
+                color="primary" 
+                dark>
+                  Place Order
+                  <v-progress-circular
+                    
+                    indeterminate
+                    color="purple"
+                  ></v-progress-circular>
+                </v-btn>
                 </form>
             </ValidationObserver>
         </v-col>
@@ -152,6 +164,7 @@ export default {
         cell_number: '',
         delivery_address: '',
         comment: '',
+        completeCart: false
     }),
 
   methods: {
@@ -170,7 +183,7 @@ export default {
         this.$emit('check-out', CheckOutData );
     }
   },
-  computed: mapGetters(['user_cart']),
+  computed: mapGetters(['user_cart', 'completeCart']),
 
 }
 </script>
