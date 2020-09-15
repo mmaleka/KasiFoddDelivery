@@ -37,7 +37,7 @@
             align="center"
             class="mx-0"
         >
-        <v-col>
+        <v-col cols-sm="12" align="center">
             <v-btn @click="AddtoCartNo1" :disabled="loading" color="warning" dark>
               Add to Cart
                 <v-progress-circular
@@ -47,7 +47,7 @@
                 ></v-progress-circular>
             </v-btn>
         </v-col>
-        <v-col>
+        <v-col cols-sm="12" align="center">
             <v-btn @click="CheckOutNo1" color="success" dark>Checkout</v-btn>
         </v-col>
         </v-row>
@@ -130,7 +130,7 @@ export default {
         router.push('/checkout')
       }
     },
-    computed: mapGetters(['product_detail', 'userjwt', 'user_cart_sum', 'cart_loading']),
+    computed: mapGetters(['product_detail', 'userjwt', 'user_cart_sum']),
     created() {
       let prod_id = this.$route.params.id
       this.fetchProductDetail(this.$route.params.id);

@@ -30,7 +30,7 @@ export default new Vuex.Store({
     user_get_cart_sum: 0,
     comments: [],
     addCartLoading: false,
-    completeCart: false,
+    completeCartLoading: false,
   },
   mutations: {
     updateToken(state, newToken) {
@@ -101,7 +101,8 @@ export default new Vuex.Store({
       state.addCartLoading = loading
     },
     completeCartUser(state, loading1){
-      state.completeCart = loading1
+      console.log("loading1: ", loading1);
+      state.completeCartLoading = loading1
     }
   },
   getters: {
@@ -118,7 +119,7 @@ export default new Vuex.Store({
     user_cart_sum: state => state.user_get_cart_sum,
     product_comments: state => state.comments,
     cart_loading: state => state.addCartLoading,
-    complete_cart_loading: state => state.completeCart,
+    complete_cart_loading: state => state.completeCartLoading,
 
   },
   actions: {

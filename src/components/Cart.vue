@@ -46,7 +46,7 @@
                 dark>
                   Place Order
                   <v-progress-circular
-                    
+                    v-if=$store.getters.complete_cart_loading
                     indeterminate
                     color="purple"
                   ></v-progress-circular>
@@ -133,7 +133,7 @@
 <script>
 import { required, email, max } from 'vee-validate/dist/rules'
 import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 setInteractionMode('eager')
 
@@ -164,10 +164,11 @@ export default {
         cell_number: '',
         delivery_address: '',
         comment: '',
-        completeCart: false
+        completeCartLoading: false
     }),
 
   methods: {
+    ...mapActions(['completeCart']),
     submit () {
       this.$refs.observer.validate()
     },
@@ -183,7 +184,7 @@ export default {
         this.$emit('check-out', CheckOutData );
     }
   },
-  computed: mapGetters(['user_cart', 'completeCart']),
+  computed: mapGetters(['user_cart', 'complete_cart_loading']),
 
 }
 </script>
