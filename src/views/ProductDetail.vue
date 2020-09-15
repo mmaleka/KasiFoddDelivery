@@ -35,7 +35,6 @@
 
         <v-row
             align="center"
-            class="mx-0"
         >
         <v-col cols="12" align="center">
             <v-btn @click="AddtoCartNo1" :disabled="loading" color="warning" dark>
@@ -53,7 +52,6 @@
         </v-row>
         <v-row
             align="center"
-            class="mx-0"
         >
             <v-rating
             :value="4.5"
