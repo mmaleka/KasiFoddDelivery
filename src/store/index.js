@@ -253,6 +253,9 @@ export default new Vuex.Store({
           })
 
         new_array = [responseCart2.data]
+
+        this.dispatch('fetchCartDetailsUserProfile', { user_profile });
+
         
         this.dispatch('AddCartItem', { new_array, prod_id, user_profile, user_quantity });
 
@@ -266,6 +269,8 @@ export default new Vuex.Store({
 
     // Finally add the item to the cart
     async AddCartItem({ commit }, cart_data2) {
+
+      
       commit('nullShit');
       let existing_items = cart_data2.new_array[0].cart_item
       let cart_id = cart_data2.new_array[0].id
@@ -367,6 +372,7 @@ export default new Vuex.Store({
 
     async fetchCartDetails({ commit }, user_id) {
       // get the owner using user id
+      console.log("user_id cart detail: ", user_id.user_id);
       const res_profile = await axios.get(
         this.state.endpoints.baseURL + 'api-accounts_profile/accounts_profile_detail/?search=' + user_id)
       let res_profile_id = res_profile.data[0].id
@@ -391,6 +397,32 @@ export default new Vuex.Store({
         commit('addUserCartData', response.data)
       }
       
+    },
+
+    async fetchCartDetailsUserProfile({ commit }, user_profile) {
+
+      let res_profile_id = user_profile
+
+      // get cart by owner
+      const res_user_cart = await axios.get(
+        this.state.endpoints.baseURL + 'api-shopping_cart3/api_shopping_cart3_cartList_byOwner/?search=' + res_profile_id)
+
+      // get the last cart for this user
+      let last_user_cart = []
+      res_user_cart.data.forEach(function (element) {
+        if (element.is_complete == false) {
+          last_user_cart = element
+        }
+      })
+
+      if (last_user_cart.is_complete == true) {
+        commit('nullShit');
+      } else {
+        const url = this.state.endpoints.baseURL + 'api-shopping_cart3/UIapi_shopping_cart3_cartdetail/' + last_user_cart.id + '/'
+        const response = await axios.get(url)
+        commit('addUserCartData', response.data)
+      }
+
     },
 
     async sendOrderEmail({ commit }, orderDetails) {
@@ -423,6 +455,25 @@ export default new Vuex.Store({
       .then(res_comment => 
         this.dispatch('fetchComments', { prod_id, res_comment }))
       .catch(err => console.error(err));
+
+    },
+
+    async RemovefromCart({ commit }, cart_data) {
+      console.log("commit: ", commit);
+      console.log("item_id: ", cart_data.item_id);
+      console.log("user_id: ", cart_data.user_id);
+      let user_id = cart_data.user_id
+
+      const url = this.state.endpoints.baseURL + 'api-shopping_cart3/api_shopping_cart3_cartItem/' + cart_data.item_id + '/'
+
+      axios
+        .delete(url)
+        .then(res => 
+          console.log(res),
+          this.dispatch('fetchCartDetails', user_id),
+        )
+        .catch(err => console.error(err));
+
 
     }
 

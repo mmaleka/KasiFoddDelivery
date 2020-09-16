@@ -84,14 +84,15 @@
             {{ item.items.description }}
           </div>
         </v-card-text>
-        <!-- <v-card-actions>
+        <v-card-actions>
           <v-btn
+            @click="RemovefromCart1(item.id)"
             text
-            color="deep-purple accent-4"
+            color="red accent-4"
           >
             Remove
           </v-btn>
-        </v-card-actions> -->
+        </v-card-actions>
       </v-card>
       </v-col>
     </v-row>
@@ -108,7 +109,7 @@
       </v-col>
     </v-row>
 
-    <v-divider></v-divider>
+    <!-- <v-divider></v-divider>
 
     <v-row>
       <v-col class="text-center">
@@ -122,7 +123,7 @@
       <v-col class="text-center">
         <p class="blue-grey--text">{{ user_cart.delivery_address }}</p>
       </v-col>
-    </v-row>
+    </v-row> -->
 
 
 
@@ -134,6 +135,7 @@
 import { required, email, max } from 'vee-validate/dist/rules'
 import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 import { mapGetters, mapActions } from 'vuex';
+import VueJwtDecode from 'vue-jwt-decode';
 
 setInteractionMode('eager')
 
@@ -168,9 +170,13 @@ export default {
     }),
 
   methods: {
-    ...mapActions(['completeCart']),
+    ...mapActions(['completeCart', 'RemovefromCart']),
     submit () {
       this.$refs.observer.validate()
+    },
+    RemovefromCart1(item_id){
+      let user_id = VueJwtDecode.decode(this.$store.getters.userjwt).user_id
+      this.RemovefromCart({ item_id, user_id });
     },
     placeOrder(e){
       this.$refs.observer.validate()
