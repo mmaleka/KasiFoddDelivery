@@ -54,25 +54,25 @@
                 class="router_link" 
                 to="/"
                 >
-                    <v-btn color="" dark>Home</v-btn>
+                    <v-btn block color="" dark>Home</v-btn>
                 </router-link>
                 <router-link 
                 class="router_link" 
                 to="/register"
                 >
-                    <v-btn color="" dark>Register</v-btn>
+                    <v-btn block color="" dark>Register</v-btn>
                 </router-link>
                 <router-link 
                 class="router_link" 
                 to="/login"
                 >
-                    <v-btn color="" dark>Login</v-btn>
+                    <v-btn block color="" dark>Login</v-btn>
                 </router-link>
                 <router-link 
                 class="router_link" 
                 to="/checkout"
                 >
-                    <v-btn color="warning" dark>My Orders {{ user_cart_sum }} Items</v-btn>
+                    <v-btn block color="warning" dark>My Orders {{ user_cart_sum }} Items</v-btn>
                 </router-link>
             </v-list-item-content>
         </v-list-item>

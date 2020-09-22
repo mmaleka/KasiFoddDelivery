@@ -39,6 +39,7 @@
                 </ValidationProvider>
 
                 <v-btn 
+                block 
                 type="submit" 
                 @click="placeOrder" 
                 value="Submit" 
@@ -86,6 +87,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn
+            block 
             @click="RemovefromCart1(item.id)"
             text
             color="red accent-4"

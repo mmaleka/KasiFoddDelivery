@@ -26,7 +26,7 @@
                     </ValidationProvider>
 
                     <!-- <v-btn class="mr-4" @click="submit">submit</v-btn> -->
-                    <v-btn type="submit" @click="Login" value="Submit" color="warning" dark>Login</v-btn>
+                    <v-btn block type="submit" @click="Login" value="Submit" color="warning" dark>Login</v-btn>
 
                     
                     </form>
@@ -36,8 +36,11 @@
         <v-row align="center" justify="center">
             <v-col cols="8">
               <router-link to = "/register">
-                <p class="blue-grey--text">Register</p>
+                <p class="blue-grey--text">or Register</p>
               </router-link>
+            </v-col>
+            <v-col cols="8">
+              <v-btn block color="" dark @click="password_reset()">forgot your password?</v-btn>
             </v-col>
             <router-view></router-view>
         </v-row>
@@ -89,7 +92,10 @@
             }
             // Send up to parent
             this.$emit('log-in', LoginData );
-      }
+      },
+      password_reset: function () {   
+          window.open("http://www.try-coding.co.za/accounts/password_reset/", "_blank");    
+      },
     },
   }
 </script>

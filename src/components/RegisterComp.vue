@@ -52,7 +52,7 @@
 
 
                     <!-- <v-btn class="mr-4" @click="submit">submit</v-btn> -->
-                    <v-btn type="submit" @click="Register" value="Submit" color="warning" dark>Register</v-btn>
+                    <v-btn block type="submit" @click="Register" value="Submit" color="warning" dark>Register</v-btn>
 
                     
                     </form>
@@ -62,8 +62,11 @@
         <v-row align="center" justify="center">
             <v-col cols="8">
               <router-link to = "/login">
-                <p class="blue-grey--text">Log In</p>
+                <p class="blue-grey--text">or Log In</p>
               </router-link>
+            </v-col>
+            <v-col cols="8">
+              <v-btn block color="" dark @click="password_reset()">forgot your password?</v-btn>
             </v-col>
             <router-view></router-view>
         </v-row>
@@ -107,7 +110,6 @@
     methods: {
       submit () {
         this.$refs.observer.validate()
-
       },
       Register(e){
           this.$refs.observer.validate()
@@ -123,7 +125,10 @@
             this.$emit('sign-in', RegisterData);
             // this.password = '';
             // this.password_confirm = '';
-      }
+      },
+      password_reset: function () {   
+          window.open("http://www.try-coding.co.za/accounts/password_reset/", "_blank");    
+      },
     },
   }
 </script>

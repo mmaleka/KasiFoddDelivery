@@ -37,7 +37,7 @@
             align="center"
         >
         <v-col cols="12" align="center">
-            <v-btn @click="AddtoCartNo1" :disabled="loading" color="warning" dark>
+            <v-btn block @click="AddtoCartNo1" :disabled="loading" color="warning" dark>
               Add to Cart
                 <v-progress-circular
                   v-if=this.$store.getters.cart_loading
@@ -47,7 +47,7 @@
             </v-btn>
         </v-col>
         <v-col cols-sm="12" align="center">
-            <v-btn @click="CheckOutNo1" color="success" dark>Checkout</v-btn>
+            <v-btn block @click="CheckOutNo1" color="success" dark>Checkout</v-btn>
         </v-col>
         </v-row>
         <v-row
