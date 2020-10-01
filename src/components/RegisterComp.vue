@@ -121,7 +121,7 @@
                 email: this.email,
                 password_confirm: this.password_confirm
             }
-            // // Send up to parent
+            // Send up to parent
             this.$emit('sign-in', RegisterData);
             // this.password = '';
             // this.password_confirm = '';

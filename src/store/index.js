@@ -139,9 +139,30 @@ export default new Vuex.Store({
         })
         .catch(err => {
           commit('loginFailure')
-          Vue.$toast.open("Incorrect username or password"+err, {
-            timeout: 2000
-          });
+
+          if (err.response.data.username) {
+            Vue.$toast.error(err.response.data.username[0], {
+              timeout: 2000
+            });
+          } else if (err.response.data.email) {
+            Vue.$toast.error(err.response.data.email[0], {
+              timeout: 2000
+            });
+          } else if (err.response.data.password) {
+            Vue.$toast.error(err.response.data.password[0], {
+              timeout: 2000
+            });
+          } else if (err.response.data.detail) {
+            Vue.$toast.error(err.response.data.detail, {
+              timeout: 2000
+            });
+          } else {
+            Vue.$toast.error(err.response.data, {
+              timeout: 2000
+            });
+          }
+
+
         })
     },
     newRegister({ commit }, registerdata) {
@@ -156,17 +177,41 @@ export default new Vuex.Store({
         .then(res => {
           this.dispatch('obtainToken', { username, password});
           this.state.username2 = username;
+          console.log(res);
           commit('registerSuccess');
           // router.push('/');
-          Vue.$toast.open("Registration successful"+res, {
+          Vue.$toast.open("Registration successful", {
             timeout: 2000
           });
         })
         .catch(err => {
           this.commit('registerFailure')
-          Vue.$toast.open("Failure to registered"+err, {
-            timeout: 2000
-          });
+          console.log("err: ", err.response.data);
+
+          if (err.response.data.username) {
+            Vue.$toast.error(err.response.data.username[0], {
+              timeout: 2000
+            });
+          } else if (err.response.data.email) {
+            Vue.$toast.error(err.response.data.email[0], {
+              timeout: 2000
+            });
+          } else if (err.response.data.password) {
+            Vue.$toast.error(err.response.data.password[0], {
+              timeout: 2000
+            });
+          } else if (err.response.data.password_confirm) {
+            Vue.$toast.error(err.response.data.password_confirm[0], {
+              timeout: 2000
+            });
+          } else {
+            Vue.$toast.error(err.response.data, {
+              timeout: 2000
+            });
+          }
+
+
+          
         })
     },
     getTestAPI() {
