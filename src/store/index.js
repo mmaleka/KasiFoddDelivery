@@ -23,6 +23,7 @@ export default new Vuex.Store({
     loggedIn: '',
     registered: '',
     categories_data: [],
+    resturants_data: [],
     products_data: [],
     product_detail_data: [],
     cart_id: '',
@@ -81,6 +82,9 @@ export default new Vuex.Store({
     addCategories(state, cat_data) {
       state.categories_data = cat_data;
     },
+    addResturants(state, rest_data) {
+      state.resturants_data = rest_data;
+    },
     addProducts(state, prod_data) {
       state.products_data = prod_data;
     },
@@ -112,6 +116,7 @@ export default new Vuex.Store({
     cartQuantity: state => state.cart_quantity,
     loggedIn: state => state.loggedIn,
     all_categories: state => state.categories_data,
+    all_resturants: state => state.resturants_data,
     all_products: state => state.products_data,
     product_detail: state => state.product_detail_data,
     user_cart: state => state.user_cart_data,
@@ -229,9 +234,16 @@ export default new Vuex.Store({
 
     async fetchCatergories({ commit }) {
       const response = await axios.get(
-        this.state.endpoints.baseURL + 'api-food_delivery/api_food_delivery_catergory/')
-      
-        commit('addCategories', response.data)
+        this.state.endpoints.baseURL + 'api-food_delivery/api_food_delivery_catergory/'
+      )
+      commit('addCategories', response.data)
+    },
+
+    async fetchResturants({ commit }) {
+      const response = await axios.get(
+        this.state.endpoints.baseURL + 'api-food_delivery/api_food_delivery_resturent/'
+      )
+      commit('addResturants', response.data)
     },
 
     async fetchProductList({ commit }) {

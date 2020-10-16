@@ -30,6 +30,16 @@ Vue.use(VueRouter)
       component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
     },
     {
+      path: '/resturant',
+      name: 'Resturant',
+      component: () => import(/* webpackChunkName: "register" */ '../views/Resturant.vue')
+    },
+    {
+      path: '/category',
+      name: 'Category',
+      component: () => import(/* webpackChunkName: "login" */ '../views/Category.vue')
+    },
+    {
       path: '/product_detail/:id',
       name: 'ProductDetail',
       meta: {

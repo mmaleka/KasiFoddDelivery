@@ -8,17 +8,14 @@
 
 <script>
 // @ is an alias to /src
-import UserFilter from '@/components/UserFilter';
 import Resturant from '@/components/Resturant';
-import Category from '@/components/Category';
 import Carousel from "@/components/Carousel";
-
+import UserFilter from '@/components/UserFilter';
 
 export default {
   name: 'Root',
   components: {
     Resturant,
-    Category,
     Carousel,
     UserFilter,
   }
