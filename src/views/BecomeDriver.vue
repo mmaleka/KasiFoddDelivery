@@ -130,20 +130,19 @@ export default {
     }),
     methods: {
       submit () {
-        this.$refs.observer.validate()
+        // this.$refs.observer.validate()
       },
       addContact(e){
-        this.$refs.observer.validate()
         e.preventDefault();
-        //   const ContactData  = {
-        //     first_name: this.first_name,
-        //     cell_number: this.cell_number,
-        //     email: this.email,
-        //   }
-          // // finally save the comment here
-          // console.log("ContactData: ", ContactData);
-          // this.$store.dispatch('sendContactData', ContactData)
-          // // mapGetters(['product_comments'])
+          const ContactData  = {
+            first_name: this.first_name,
+            cell_number: this.cell_number,
+            email: this.email,
+          }
+          // finally save the comment here
+          console.log("ContactData: ", ContactData);
+          this.$store.dispatch('sendContact', ContactData)
+          // mapGetters(['product_comments'])
           // this.first_name = ''
           // this.cell_number = ''
           // this.email = ''
