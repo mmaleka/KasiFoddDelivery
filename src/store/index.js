@@ -515,6 +515,25 @@ export default new Vuex.Store({
 
     },
 
+
+    async sendContact({ commit }, contact_data) {
+      console.log("commit: ", commit);
+
+      const url = this.state.endpoints.baseURL + 'api_contact/api_contact/'
+      axios.post(url, {
+        first_name: contact_data.first_name,
+        cell_number: contact_data.cell_number,
+        email: contact_data.email,
+      })
+      .then(res => {
+        console.log(res)
+        Vue.$toast.open("Thank you. We will get in touch soon", {
+          timeout: 4000
+        });
+      }  
+      )
+    },
+
     async RemovefromCart({ commit }, cart_data) {
       console.log("commit: ", commit);
       console.log("item_id: ", cart_data.item_id);

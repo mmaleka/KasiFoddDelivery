@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container fluid>
-      <v-row align="left" justify="left">
+      <v-row align="center" justify="center">
         <v-col cols="8">
           <h3 class="blue-grey--text">Filter by:</h3>
         </v-col>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-    name: "Filter",
+    name: "UIfilter",
 }
 </script>
 

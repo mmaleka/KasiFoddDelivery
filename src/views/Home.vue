@@ -1,14 +1,14 @@
 <template>
   <div class="root">
     <Carousel />
-    <UserFilter />
+    <Userfilter />
     <Resturant />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import UserFilter from '@/components/UserFilter';
+import Userfilter from '@/components/UIfilter';
 import Resturant from '@/components/Resturant';
 import Category from '@/components/Category';
 import Carousel from "@/components/Carousel";
@@ -20,7 +20,7 @@ export default {
     Resturant,
     Category,
     Carousel,
-    UserFilter,
+    Userfilter,
   }
 }
 </script>

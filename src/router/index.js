@@ -55,6 +55,11 @@ Vue.use(VueRouter)
       },
       component: () => import(/* webpackChunkName: "checkout" */ '../views/Checkout.vue')
     },
+    {
+      path: '/become_driver',
+      name: 'BecomeDriver',
+      component: () => import(/* webpackChunkName: "checkout" */ '../views/BecomeDriver.vue')
+    },
 ]
 
 

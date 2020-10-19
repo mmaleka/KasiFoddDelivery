@@ -74,6 +74,13 @@
                 >
                     <v-btn block color="warning" dark>My Orders {{ user_cart_sum }} Items</v-btn>
                 </router-link>
+
+                <router-link 
+                class="router_link" 
+                to="/become_driver"
+                >
+                    <v-btn block color="" dark>Become a Driver</v-btn>
+                </router-link>
             </v-list-item-content>
         </v-list-item>
     </v-navigation-drawer>

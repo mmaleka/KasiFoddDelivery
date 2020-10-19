@@ -10,7 +10,7 @@
 // @ is an alias to /src
 import Category from '@/components/Category'
 import Carousel from "@/components/Carousel";
-import UserFilter from '@/components/UserFilter';
+import UserFilter from '@/components/UIfilter';
 
 export default {
   name: 'Root',
