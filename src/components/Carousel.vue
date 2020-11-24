@@ -51,13 +51,6 @@ export default {
         ]
       }
     },
-    // methods: {
-    //   ...mapActions(['fetchCarousel']),
-    // },
-    // computed: mapGetters(['all_carousel']),
-    // created() {
-    //   this.fetchCarousel();
-    // },
 }
 </script>
 

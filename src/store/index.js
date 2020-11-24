@@ -499,6 +499,22 @@ export default new Vuex.Store({
 
     },
 
+    async UserProductView({ commit }, product_data) {
+      console.log("commit: ", commit);
+      console.log("product_data.data: ", product_data);
+
+      const url = this.state.endpoints.baseURL + 'api-analytics/api_user_product_view/'
+      axios.post(url, {
+        user: product_data.user_id,
+        product: product_data.prod_id,
+      })
+        .then(res_userproductview => console.log(res_userproductview))
+        .catch(err => console.error(err));
+
+    },
+
+
+
     async sendComment({ commit }, comment_data) {
       console.log("commit: ", commit);
       

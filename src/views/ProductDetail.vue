@@ -136,6 +136,8 @@ export default {
       this.fetchCartDetails(user_id);
       
       this.$store.dispatch('fetchComments', { prod_id })
+      // add the user and viewed product by user
+      this.$store.dispatch('UserProductView', { prod_id, user_id })
     },
 }
 </script>

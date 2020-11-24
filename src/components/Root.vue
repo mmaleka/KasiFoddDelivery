@@ -2,7 +2,6 @@
   <div class="root">
     <Carousel />
     <Filter />
-    dsfsdfsd
     <Resturant />
   </div>
 </template>
