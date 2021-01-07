@@ -19,6 +19,8 @@
 
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
     name: 'Carousel',
     data () {
@@ -50,6 +52,19 @@ export default {
             },
         ]
       }
+    },
+
+    methods: {
+    ...mapActions(['getUserLocation']),
+    },
+
+
+
+    computed: mapGetters(['user_location']),
+
+    created() {
+      this.getUserLocation();
+      this.delivery_address = this.$store.getters.user_location;
     },
 }
 </script>

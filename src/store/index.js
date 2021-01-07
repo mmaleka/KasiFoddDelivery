@@ -32,6 +32,7 @@ export default new Vuex.Store({
     comments: [],
     addCartLoading: false,
     completeCartLoading: false,
+    user_location: '',
   },
   mutations: {
     updateToken(state, newToken) {
@@ -106,6 +107,9 @@ export default new Vuex.Store({
     },
     completeCartUser(state, loading1){
       state.completeCartLoading = loading1
+    },
+    updateUserLocation(state, user_location){
+      state.user_location = user_location
     }
   },
   getters: {
@@ -113,8 +117,9 @@ export default new Vuex.Store({
     userName: state => state.username2,
     userjwt: state => state.jwt,
     userName1: state => state.username,
-    cartQuantity: state => state.cart_quantity,
     loggedIn: state => state.loggedIn,
+
+    cartQuantity: state => state.cart_quantity,
     all_categories: state => state.categories_data,
     all_resturants: state => state.resturants_data,
     all_products: state => state.products_data,
@@ -124,9 +129,60 @@ export default new Vuex.Store({
     product_comments: state => state.comments,
     cart_loading: state => state.addCartLoading,
     complete_cart_loading: state => state.completeCartLoading,
-
+    user_location: state => state.user_location,
   },
   actions: {
+    getUserLocation({ commit }) {
+
+      // listen to Cordova event
+      Vue.cordova.on('deviceready', () => {
+        
+        Vue.cordova.geolocation.getCurrentPosition((position) => {
+          // window.alert('Current position : ' + position.coords.latitude + ',' + position.coords.longitude)
+          const API_KEY = 'AIzaSyDUtEbZWwtSvV2PSsu-8jVHMBng9X98FWc'
+          const LATLNG = position.coords.latitude + ',' + position.coords.longitude
+          const url_geacode = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + LATLNG + '&key=' + API_KEY
+
+          axios.get(url_geacode)
+            .then(res_address => {
+              console.log(res_address.data.results[0].formatted_address);
+              commit('updateUserLocation', res_address.data.results[0].formatted_address);
+              
+
+              const url_postUserLocation = this.state.endpoints.baseURL + "api-analytics/api_user_location/"
+
+              axios
+                .post(url_postUserLocation, {
+                  latlng: LATLNG,
+                  location: res_address.data.results[0].formatted_address
+                })
+                .then(res => console.log(res))
+                .catch(err => console.error(err));
+                
+
+            })
+
+          
+
+            
+          
+        }, (error) => {
+            console.log(error);
+            Vue.$toast.error('Please turn on location', {
+            timeout: 2000
+            });
+        }, {
+          timeout: 1000,
+          enableHighAccuracy: true
+        })
+
+        
+
+      });
+
+
+    },
+
     obtainToken({ commit }, user) {
       const username = user.username
       axios.post(this.state.endpoints.baseURL + this.state.endpoints.obtainJWT, user)
@@ -219,6 +275,7 @@ export default new Vuex.Store({
           
         })
     },
+    
     getTestAPI() {
       const config = {
         headers: {
@@ -281,7 +338,6 @@ export default new Vuex.Store({
         this.state.endpoints.baseURL + 'api-shopping_cart3/api_shopping_cart3_cartList_byOwner/?search=' + responseProfile_id)
       
       this.dispatch('FilterUserCart', { responseCart, prod_id, user_id, responseProfile_id, user_quantity });
-      commit('nullShit');
     },
 
     async FilterUserCart({ commit }, cart_data2) {
@@ -351,7 +407,7 @@ export default new Vuex.Store({
       let cart_id = cart_data3.cart_id
       let existing_items = cart_data3.existing_items
       existing_items.push(cart_item_id)
-      commit('nullShit');
+
 
       
       const url = this.state.endpoints.baseURL + 'api-shopping_cart3/api_shopping_cart3_cartdetail/' + cart_id + '/'

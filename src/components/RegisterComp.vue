@@ -74,61 +74,61 @@
 </template>
 
 <script>
-  import { required, email, max } from 'vee-validate/dist/rules'
-  import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+import { required, email, max } from 'vee-validate/dist/rules'
+import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 
-  setInteractionMode('eager')
+setInteractionMode('eager')
 
-  extend('required', {
-    ...required,
-    message: '{_field_} can not be empty',
-  })
+extend('required', {
+  ...required,
+  message: '{_field_} can not be empty',
+})
 
-  extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters',
-  })
+extend('max', {
+  ...max,
+  message: '{_field_} may not be greater than {length} characters',
+})
 
-  extend('email', {
-    ...email,
-    message: 'Email must be valid',
-  })
+extend('email', {
+  ...email,
+  message: 'Email must be valid',
+})
 
-  export default {
-    components: {
-      ValidationProvider,
-      ValidationObserver,
+export default {
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+  },
+  data: () => ({
+      username: '',
+      first_name: '',
+      email: '',
+      password: '',
+      password_confirm: '',
+  }),
+
+  methods: {
+    submit () {
+      this.$refs.observer.validate()
     },
-    data: () => ({
-        username: '',
-        first_name: '',
-        email: '',
-        password: '',
-        password_confirm: '',
-    }),
-
-    methods: {
-      submit () {
+    Register(e){
         this.$refs.observer.validate()
-      },
-      Register(e){
-          this.$refs.observer.validate()
-          e.preventDefault();
-            const RegisterData = {
-                username: this.username,
-                password: this.password,
-                first_name: this.first_name,
-                email: this.email,
-                password_confirm: this.password_confirm
-            }
-            // Send up to parent
-            this.$emit('sign-in', RegisterData);
-            // this.password = '';
-            // this.password_confirm = '';
-      },
-      password_reset: function () {   
-          window.open("http://www.try-coding.co.za/accounts/password_reset/", "_blank");    
-      },
+        e.preventDefault();
+          const RegisterData = {
+              username: this.username,
+              password: this.password,
+              first_name: this.first_name,
+              email: this.email,
+              password_confirm: this.password_confirm
+          }
+          // Send up to parent
+          this.$emit('sign-in', RegisterData);
+          // this.password = '';
+          // this.password_confirm = '';
     },
-  }
+    password_reset: function () {   
+        window.open("http://www.try-coding.co.za/accounts/password_reset/", "_blank");    
+    },
+  },
+}
 </script>

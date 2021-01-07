@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "../src-cordova/android.keystore",
+                "storePassword": "android",
+                    "alias": "kasifood",
+                        "password" : "Mpho@@6829",
+                            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "../src-cordova/android.keystore",
+                "storePassword": "",
+                    "alias": "kasifood",
+                        "password" : "Mpho@@6829",
+                            "keystoreType": ""
+        }
+    }
+}

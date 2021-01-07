@@ -2,7 +2,7 @@
   <div class="root">
     <Carousel />
     <Userfilter />
-    <Resturant />
+    <Category />
   </div>
 </template>
 

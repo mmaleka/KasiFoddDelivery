@@ -138,6 +138,8 @@ import { required, email, max } from 'vee-validate/dist/rules'
 import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 import { mapGetters, mapActions } from 'vuex';
 import VueJwtDecode from 'vue-jwt-decode';
+// import Vue from 'vue'
+// Vue.forceUpdate();
 
 setInteractionMode('eager')
 
@@ -168,11 +170,12 @@ export default {
         cell_number: '',
         delivery_address: '',
         comment: '',
-        completeCartLoading: false
+        completeCartLoading: false,
+        componentKey: 0,
     }),
 
   methods: {
-    ...mapActions(['completeCart', 'RemovefromCart']),
+    ...mapActions(['completeCart', 'RemovefromCart', 'getUserLocation']),
     submit () {
       this.$refs.observer.validate()
     },
@@ -190,9 +193,35 @@ export default {
         }
         // will update the data to the api but still do form validation
         this.$emit('check-out', CheckOutData );
-    }
+        let user_id = VueJwtDecode.decode(this.$store.getters.userjwt).user_id
+        this.fetchCartDetails(user_id);
+
+    },
   },
-  computed: mapGetters(['user_cart', 'complete_cart_loading']),
+  computed: mapGetters(['user_cart', 'complete_cart_loading', 'user_location']),
+
+  created() {
+      this.getUserLocation();
+      this.delivery_address = this.$store.getters.user_location;
+  },
+
+  // mounted: function () {
+  //   // this.delivery_address = this.$store.getters.user_location;
+
+  //   // this.$nextTick(function () {
+  //   //     window.setInterval(() => {
+  //   //         console.log(this.delivery_address);
+  //   //         console.log(this.$store.getters.user_location);
+  //   //         if (this.delivery_address != this.$store.getters.user_location) {
+  //   //           console.log("not the same so change");
+  //   //           this.delivery_address = this.$store.getters.user_location;
+  //   //         }
+  //   //     },1000);
+  //   // })
+
+  // }
+
+  
 
 }
 </script>
