@@ -1,7 +1,13 @@
 <template>
   <v-container class="grey lighten-5">
+    <ul
+      v-for="rest in all_resturants"
+      :key="rest.id"
+    >
+
+    
     <v-row
-      v-for="rest in all_resturants" :key="rest.id"
+      v-if="rest.available"
       class="mb-6"
       justify="center"
       no-gutters
@@ -37,9 +43,14 @@
               :rounded="rounded"
             >
               <v-list-item-group color="primary">
-                <v-list-item
+
+
+                <ul
                   v-for="product in rest.products"
                   :key="product.id"
+                >
+                <v-list-item
+                  v-if="product.available"
                 >
                   <v-list-item-content>
                     <router-link 
@@ -53,6 +64,9 @@
                     </router-link>
                   </v-list-item-content>
                 </v-list-item>
+                </ul>
+
+                
               </v-list-item-group>
             </v-list>
         </v-card-text>
@@ -62,6 +76,7 @@
       </keep-alive>
     </v-row>
    
+    </ul>
   </v-container>
 </template>
 

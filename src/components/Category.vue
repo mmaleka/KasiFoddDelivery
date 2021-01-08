@@ -1,7 +1,13 @@
 <template>
   <v-container class="grey lighten-5">
+    <ul
+      v-for="cat in all_categories" 
+      :key="cat.id"
+    >
+
+    
     <v-row
-      v-for="cat in all_categories" :key="cat.id"
+      v-if="cat.available"
       class="mb-6"
       justify="center"
       no-gutters
@@ -37,9 +43,13 @@
               :rounded="rounded"
             >
               <v-list-item-group color="primary">
-                <v-list-item
+
+                <ul
                   v-for="product in cat.products"
                   :key="product.id"
+                >
+                <v-list-item
+                  v-if="product.available"
                 >
                   <v-list-item-content>
                     <router-link 
@@ -53,6 +63,8 @@
                     </router-link>
                   </v-list-item-content>
                 </v-list-item>
+                </ul>
+
               </v-list-item-group>
             </v-list>
         </v-card-text>
@@ -62,6 +74,7 @@
       </keep-alive>
     </v-row>
    
+    </ul>
   </v-container>
 </template>
 
