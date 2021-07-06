@@ -17,8 +17,8 @@ export default new Vuex.Store({
     endpoints: {
       obtainJWT: 'api-food_delivery/api/token/',
       refreshJWT: 'api-food_delivery/api/token/refresh/',
-      // baseURL: 'http://127.0.0.1:8000/',
-      baseURL: 'https://try-coding.herokuapp.com/'
+      baseURL: 'http://127.0.0.1:8080/',
+      // baseURL: 'https://try-coding.herokuapp.com/'
     },
     loggedIn: '',
     registered: '',
@@ -235,10 +235,13 @@ export default new Vuex.Store({
         password,
         password_confirm
       })
-        .then(res => {
+        .then(resUser => {
           this.dispatch('obtainToken', { username, password});
           this.state.username2 = username;
-          console.log(res);
+          console.log(resUser);
+          let res_user_id = resUser.data.id
+          console.log("res_user_id: ", res_user_id);
+          this.dispatch('updateUserProfile', { res_user_id });
           commit('registerSuccess');
           // router.push('/');
           Vue.$toast.open("Registration successful", {
@@ -275,6 +278,26 @@ export default new Vuex.Store({
           
         })
     },
+
+
+    async updateUserProfile({ commit }, res_user_id) {
+      commit('nullShit');
+      let user_id = res_user_id.res_user_id
+      console.log("user_id: ", user_id);
+      let url_profileUpdate = this.state.endpoints.baseURL + 'api-accounts_profile/accounts_profile/'
+      axios.post(url_profileUpdate, {
+        user: user_id,
+        tag: "food_delivery"
+      })
+        .then(res => {
+          console.log("res_adding_profile: ", res);
+        })
+        .catch(err => {
+          console.log("err_adding_profile: ", err);
+        })
+    },
+
+
     
     getTestAPI() {
       const config = {
